@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Web</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section class="sub-header"><!----------header------->
+        <nav><!--------- Navbar ------>
+            <a href="index.html"><img src="img/logo2.jpg"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="service.html">SERVICE</a></li>
+                    <li><a href="skills.html">SKILLS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1>About</h1>
+    </section>
+
+    <!------------- Bioadata ----------->
+    <section class="bio">
+        <h1>Biodata</h1>
+        <p>Halo semua!Perkenalkan nama saya <b>Ghali Rizki Lesmana</b>, dan saya adalah seorang Mahasiswa yang bersemangat untuk belajar dan berkembang. Saya ingin berbagi sedikit tentang diri saya agar Anda dapat mengenal saya lebih baik.
+            <br>Saat ini, saya adalah mahasiswa di <b>STMIK IKMI Cirebon</b> jurusan <b>Rekayasa Perangkat Lunak</b>. Saya selalu tertarik pada Bidang IT, dan saya berharap untuk mengejar karier dalam bidang ini di masa depan. Pendidikan adalah fondasi penting dalam kehidupan saya, dan saya selalu berusaha untuk belajar dan tumbuh.
+            <br>Selain fokus pada pendidikan, saya memiliki berbagai hobi yang saya nikmati dalam waktu luang. Saya suka Berolahraga seperti bermain Badminton dan juga Voli. Hobi-hobi ini membantu saya menjaga keseimbangan dalam hidup saya dan memberi saya energi positif.</p>
+        <div class="row">
+            <div class="bio-col">
+                <img src="img/sd.jpg">
+                <div class="layer">
+                    <h3>SDN 1 Kanci<br>2009-2015 <br><p>Jl. Kanci - Sindanglaut, Kanci, Kec. Astanajapura, Kabupaten Cirebon, Jawa Barat 45181</p></h3>
+                </div>
+            </div>
+            <div class="bio-col">
+                <img src="img/smp.jpg">
+                <div class="layer">
+                    <h3>SMPN 1 Astanajapura <br>2015-2018 <p>Kanci, Kec. Astanajapura, Kabupaten Cirebon, Jawa Barat 45181</p></h3>
+                </div>
+            </div>
+            <div class="bio-col">
+                <img src="img/sma.jpg">
+                <div class="layer">
+                    <h3>SMAN 1 Astanajpura <br>2019-2021 <p>Jl. Kh. Wahid Hasyim No.97, Kanci, Kec. Astanajapura, Kabupaten Cirebon, Jawa Barat 45181</p></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!---------footer---------->
+    <section class="footer">
+        <h4>Contact Me</h4>
+        <div class="icons">
+            <a href="https://www.facebook.com/ghalirizkilesmana"><i class="fa fa-facebook"></i></a>
+            <a href="https://instagram.com/geeldasroxy"><i class="fa fa-instagram"></i></a>
+            <a href="https://wa.me/6289660177643"><i class="fa fa-whatsapp"></i></a>
+            <a href="https://t.me/lisosfear"><i class="fa fa-telegram"></i></a>
+        </div>
+        <p>Made by Ghali Rizki Lesmana<i class="fa fa-coffee"></i></p>
+    </section>
+
+
+    <!--------------JS untuk toggle Menu------------->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px";
+        }
+
+    </script>
+</body>
+</html>

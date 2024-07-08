@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Web</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section class="sub-header"><!----------header------->
+        <nav><!--------- Navbar ------>
+            <a href="index.html"><img src="img/logo2.jpg"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="service.html">SERVICE</a></li>
+                    <li><a href="skills.html">SKILLS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1>Skill</h1>
+    </section>
+    <!--------- skills page content--------->
+        <section class="skills">
+            <h1>My Skills</h1>
+            <div class="row">
+                <div class="skill-col">
+                    <i class="fa fa-code"></i>
+                    <h3>Front-End Devloper</h3>
+                    <div class="skill-bar">
+                        <p>HTML</p>
+                        <div class="skill-box">
+                            <div class="html">80%</div>
+                        </div>
+                        <p>CSS</p>
+                        <div class="skill-box">
+                            <div class="css">70%</div>
+                        </div>
+                        <p>Javascript</p>
+                        <div class="skill-box">
+                            <div class="javascript">50%</div>
+                        </div>
+                        <p>React JS</p>
+                        <div class="skill-box">
+                            <div class="react">45%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-col">
+                    <i class="fa fa-bug"></i>
+                    <h3>Back-End Devloper</h3>
+                    <div class="skill-bar">
+                        <p>PHP</p>
+                        <div class="skill-box">
+                            <div class="php">70%</div>
+                        </div>
+                        <p>Python</p>
+                        <div class="skill-box">
+                            <div class="python">70%</div>
+                        </div>
+                        <p>Mysql</p>
+                        <div class="skill-box">
+                            <div class="sql">70%</div>
+                        </div>
+                        <p>Firebase</p>
+                        <div class="skill-box">
+                            <div class="fire">45%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-col">
+                    <i class="fa fa-crop"></i>
+                    <h3>UI/UX Design</h3>
+                    <div class="skill-bar">
+                        <p>Figma</p>
+                        <div class="skill-box">
+                            <div class="figma">70%</div>
+                        </div>
+                        <p>Sketch</p>
+                        <div class="skill-box">
+                            <div class="sketch">60%</div>
+                        </div>
+                        <p>Photoshop</p>
+                        <div class="skill-box">
+                            <div class="photoshop">70%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </section>
+
+
+
+
+    <!---------footer---------->
+    <section class="footer">
+        <h4>Contact Me</h4>
+        <div class="icons">
+            <a href="https://www.facebook.com/ghalirizkilesmana"><i class="fa fa-facebook"></i></a>
+            <a href="https://instagram.com/geeldasroxy"><i class="fa fa-instagram"></i></a>
+            <a href="https://wa.me/6289660177643"><i class="fa fa-whatsapp"></i></a>
+            <a href="https://t.me/lisosfear"><i class="fa fa-telegram"></i></a>
+        </div>
+        <p>Made by Ghali Rizki Lesmana<i class="fa fa-coffee"></i></p>
+    </section>
+
+
+    <!--------------JS untuk toggle Menu------------->
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px";
+        }
+
+    </script>
+</body>
+</html>
