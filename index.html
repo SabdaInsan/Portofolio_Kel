@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon"
+        href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg"
+        color="#111">
+    <link rel="canonical" href="https://codepen.io/ecemgo/pen/jOoNePb">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cyberpunk.css">
+    <!-- css swiper -->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+
+
+
+        .container-slider {
+            width: 100%;
+        }
+
+        .swiper {
+            width: 90%;
+            /* Ubah lebar swiper */
+            padding: 50px 0;
+            /* Sesuaikan padding atas dan bawah */
+        }
+
+        .swiper-slide {
+            position: relative;
+            width: 250px;
+            /* Ubah lebar slider */
+            height: 500px;
+            /* Ubah tinggi slider */
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 1s;
+            user-select: none;
+        }
+
+        .swiper-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg,
+                    rgba(13, 73, 130, 0.8),
+                    rgba(39, 8, 92, 0.8));
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s;
+        }
+
+        .swiper-slide p {
+            position: absolute;
+            left: 20px;
+            bottom: 10px;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: 2px;
+            z-index: 2;
+            opacity: 0;
+            transform: rotate(360deg) scale(0);
+            transition: 0.8s;
+        }
+
+        .swiper-slide-active {
+            position: relative;
+            width: 350px;
+            transition: 1s;
+        }
+
+        .swiper-slide-active::after {
+            background: rgba(123, 123, 123, 0.4);
+        }
+
+        .swiper-slide-active img {
+            transform: scale(1.3);
+            object-position: 50% 0%;
+        }
+
+        .swiper-slide-active p {
+            transform: rotate(0deg) scale(1);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet {
+            width: 16px;
+            height: 16px;
+            background-color: #111113;
+            border-radius: 50%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .swiper-pagination-bullet-active {
+            width: 32px;
+            background-color: #12336f;
+            border-radius: 14px;
+        }
+
+        .audio-icon {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        #play-pause-button {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            left: 3%;
+            bottom: 5%;
+            background-color: transparent;
+            background-image: radial-gradient(50% 115% at 50% -5%,
+                    rgba(255, 255, 255, 0.11) 0%,
+                    transparent 100%);
+            box-shadow: inset 0 0px 10px 0px rgba(255, 255, 255, 0.14),
+                inset 0px 5px 10px 0px rgba(255, 255, 255, 0.11),
+                inset 0px 2px 5px 0px rgba(255, 255, 255, 0.4),
+                inset 0px 3px 20px 0px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+            border: 0;
+            border-radius: 50%;
+            outline: 0;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #play-pause-button:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #play-pause-button:active {
+            transform: scale(0.95);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <!-- end of css swiper -->
+
+    <!-- cdn js -->
+    <script
+        src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+    <script
+        src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-6d8bf8b4b479137260842506acbb12717dace0823c023e08b96360e60b0840d9.js"></script>
+    <script
+        src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+    <script
+        src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+    <!-- end of cdn js -->
+
+    <title>Profil Kelompok</title>
+
+</head>
+
+<body class="example"
+    style="margin: 0; height: 100vh; background-image: url('images/bg-body.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center center; background-attachment: fixed;">
+    <header class="header">
+        <a href="#" class="logo">Port<span>folio</span></a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav id="navbar">
+            <a href="#card1" class="active">Home</a>
+            <a href="#about">Our Members</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+    <!-- floating info -->
+    <section class="container-info">
+        <div class="card-info">
+            <div class="content-info">
+                <img class="logo-info" src="images/logo.png" alt="mparticle">
+                <div class="hover_content-info">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio possimus aut reiciendis,
+                        perspiciatis inventore mollitia in aliquid magnam fugit dolores dolor libero vero itaque</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of floating info -->
+
+
+    <div class="card1">
+        <div id="card1" class="card container">
+            <div class="card-body">
+                <div class="w3-container w3-padding-64">
+                    <div class="content-container" style=" position: relative; top: -90px;">
+                        <div class="w3-row">
+                            <div class="w3-col m6 w3-center w3-padding-large">
+
+                                <p style="color: rgb(0, 0, 0); text-align: center;"><b>KELOMPOK 1</b></p>
+                                <hr style="border-color: rgba(17, 151, 208, 0);"><br>
+                                <div class="cyber-tile-big fg-white bg-black mr-4 inline-block vt-bot"
+                                    style="position: relative; top: -20px;">
+                                    <iframe width="600" height="290"
+                                        src="https://www.youtube.com/embed/Ot3v5IAyUBA?si=c9C5zQMHNbufnFx_"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <label>
+                                        <p>Video Perkenalan Kelompok</p>
+                                    </label>
+                                </div>
+                                <div class="w3-card-4 w3-margin w3-white" style="border-radius: 10px; height: 150px; width: 565px;">
+                                    <div class="w3-container" style="position: relative; top: 7px;">
+                                    <p>
+                                        Kelompok 1 adalah sebuah tim dinamis yang terdiri dari empat individu berbakat
+                                        yang memiliki keahlian dan minat yang beragam. Dengan semangat kolaboratif,
+                                        kami bersatu untuk menciptakan solusi inovatif dan mencapai tujuan bersama.
+                                        Masing-masing anggota dari kami membawa perspektif unik dan kontribusi berharga,
+                                        menjadikan Kelompok ini sebagai tim yang kuat dan harmonis dalam menghadapi
+                                        tantangan dan meraih kesuksesan.
+                                    </p>
+                                </div>
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Hide this text on small devices -->
+                            <div class="w3-col m6 w3-padding-large">
+                                <div style="position: relative; top: -30px;">
+                                    <audio id="background-music" loop>
+                                        <source
+                                            src="https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/stranger-things-luxide-remix-no-copyright-music.mp3"
+                                            type="audio/mpeg" />
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <button id="play-pause-button">
+                                        <ion-icon class="audio-icon" id="play-music" name="play"></ion-icon>
+                                        <ion-icon class="audio-icon hidden" id="pause-music" name="pause"></ion-icon>
+                                    </button>
+                                    <div id="" class=""></div>
+
+                                    <div class="container-slider">
+                                        <div class="swiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="images/foto-sabda.jpg" />
+                                                    <p>Sabda</p>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="images/daffa.png" />
+                                                    <p>Robert</p>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="images/profil.jpg" />
+                                                    <p>Ghali</p>
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="images/Formal.jpeg" />
+                                                    <p>Eleven</p>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="about" class="card container">
+            <div class="card-body">
+                <div class="w3-container w3-padding-64">
+                    <div class="content-container" style=" position: relative; top: -50px;">
+                        <h3 class="w3-center"
+                            style="font-weight: bold; color: rgb(0, 0, 0); position: relative; top: 8px;">Anggota 1
+                        </h3>
+                        <p class="w3-center"><em>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</em></p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa corporis neque quibusdam,
+                            tempora officia quaerat adipisci vitae deserunt provident suscipit vero accusantium autem.
+                            Sit maiores sed totam, tempora delectus fugit?
+                        </p>
+                        <div class="w3-row">
+                            <div class="w3-col m6 w3-center w3-padding-large">
+                                <p style="color: rgb(0, 0, 0); text-align: center;"><b><i
+                                            class="fa fa-user w3-margin-right"></i>SABDA INSAN PAMUNGKAS</b></p>
+                                <hr style="border-color: rgb(17, 151, 208);"><br>
+                                <div class="grille">
+                                    <a href="cvSabda/index.html">
+                                        <div class="card-img1">
+                                            <div class="img"></div>
+                                            <div class="card-box box-img left">
+                                                <h2>Sabda</h2>
+                                                <p>cloud solutions architect</p>
+                                            </div>
+                                            <div class="card-box box-img-2 right">
+                                                <h2>Skills</h2>
+                                                <p>Docker</p>
+                                                <p>Terraform</p>
+                                                <p>AWS</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Hide this text on small devices -->
+                            <div class="w3-col m6 w3-hide-small w3-padding-large">
+                                <p style="font-size: 16px;">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusamus debitis
+                                    vitae vero natus veniam veritatis accusantium commodi? Et reiciendis assumenda atque
+                                    unde soluta pariatur voluptate distinctio, animi rem praesentium. Lorem ipsum dolor,
+                                    sit amet consectetur adipisicing elit. Illum sit similique reprehenderit sequi
+                                    doloremque sapiente accusamus possimus quis suscipit voluptates hic, iste facilis.
+                                    Quisquam voluptatem quidem deleniti, explicabo nihil facere.
+                                </p>
+                                <div class="social-media">
+                                    <a href="https://github.com/Sumit43246"><i class='bx bxl-github'></i></a>
+                                    <a href="https://www.instagram.com/itsme.sabda_/"><i
+                                            class='bx bxl-instagram'></i></a>
+                                    <a href="https://x.com/Sumit_43246_"><i class='bx bxl-twitter'></i></a>
+                                    <a href="https://www.facebook.com/profile.php?id=100073174359992"><i
+                                            class='bx bxl-facebook'></i></a>
+                                    <a href="https://t.me/itz_official_boy_xr"><i class='bx bxl-telegram'></i></a>
+                                </div>
+                                <div>
+                                    <a href="https://wa.me/0895800808248" class="special-link" title="WhatsApp"><i
+                                            class="fa fa-envelope"></i> Message Me</a>
+                                </div>
+                                <div class="skill-bar" style="margin-top: -10px; width: 100%;">
+                                    <p class="" style="font-size: 16px;"><b><i class="fa fa-asterisk fa-fw"
+                                                style="font-size: 14px; color: rgb(17, 151, 208);"></i>Skills</b>
+                                    </p>
+                                    <p style="font-size: 14px; margin-top: 5px;">Adobe Photoshop</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:90%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            90%</div>
+                                    </div>
+                                    <p style="font-size: 14px;">Photography</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:80%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            <div class="w3-center w3-text-white">80%</div>
+                                        </div>
+                                    </div>
+                                    <p style="font-size: 14px;">Illustrator</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:75%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            75%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="member2" class="card container">
+            <div class="card-body">
+                <div class="w3-container w3-padding-64">
+                    <div class="content-container" style=" position: relative; top: -50px;">
+                        <h3 class="w3-center"
+                            style="font-weight: bold; color: rgb(0, 0, 0); position: relative; top: 8px;">Anggota 2</h3>
+                        <p class="w3-center"><em>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</em></p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa corporis neque quibusdam,
+                            tempora officia quaerat adipisci vitae deserunt provident suscipit vero accusantium autem.
+                            Sit maiores sed totam, tempora delectus fugit?
+                        </p>
+                        <div class="w3-row">
+                            <div class="w3-col m6 w3-center w3-padding-large">
+                                <p style="color: rgb(0, 0, 0); text-align: center;"><b><i
+                                            class="fa fa-user w3-margin-right"></i>Daffa Farhan Naufal</b></p>
+                                <hr style="border-color: rgb(17, 151, 208);"><br>
+                                <div class="grille">
+                                    <a href="cvDaffa/index.html">
+                                        <div class="card-img2">
+                                            <div class="img"></div>
+                                            <div class="card-box box-img left">
+                                                <h2>Robert</h2>
+                                                <p>cloud solutions architect</p>
+                                            </div>
+                                            <div class="card-box box-img-2 right">
+                                                <h2>Skills</h2>
+                                                <p>Docker</p>
+                                                <p>Terraform</p>
+                                                <p>AWS</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Hide this text on small devices -->
+                            <div class="w3-col m6 w3-hide-small w3-padding-large">
+                                <p style="font-size: 16px;">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusamus debitis
+                                    vitae vero natus veniam veritatis accusantium commodi? Et reiciendis assumenda atque
+                                    unde soluta pariatur voluptate distinctio, animi rem praesentium. Lorem ipsum dolor,
+                                    sit amet consectetur adipisicing elit. Illum sit similique reprehenderit sequi
+                                    doloremque sapiente accusamus possimus quis suscipit voluptates hic, iste facilis.
+                                    Quisquam voluptatem quidem deleniti, explicabo nihil facere.
+                                </p>
+                                <div class="social-media">
+                                    <a href="https://github.com/Sumit43246"><i class='bx bxl-github'></i></a>
+                                    <a href="https://www.instagram.com/itsme.sabda_/"><i
+                                            class='bx bxl-instagram'></i></a>
+                                    <a href="https://x.com/Sumit_43246_"><i class='bx bxl-twitter'></i></a>
+                                    <a href="https://www.facebook.com/profile.php?id=100073174359992"><i
+                                            class='bx bxl-facebook'></i></a>
+                                    <a href="https://t.me/itz_official_boy_xr"><i class='bx bxl-telegram'></i></a>
+                                </div>
+                                <div>
+                                    <a href="https://wa.me/0895800808248" class="special-link" title="WhatsApp"><i
+                                            class="fa fa-envelope"></i> Message Me</a>
+                                </div>
+                                <div class="skill-bar" style="margin-top: -10px; width: 100%;">
+                                    <p class="" style="font-size: 16px;"><b><i class="fa fa-asterisk fa-fw"
+                                                style="font-size: 14px; color: rgb(17, 151, 208);"></i>Skills</b>
+                                    </p>
+                                    <p style="font-size: 14px; margin-top: 5px;">Adobe Photoshop</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:90%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            90%</div>
+                                    </div>
+                                    <p style="font-size: 14px;">Photography</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:80%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            <div class="w3-center w3-text-white">80%</div>
+                                        </div>
+                                    </div>
+                                    <p style="font-size: 14px;">Illustrator</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:75%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            75%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="member3" class="card container">
+            <div class="card-body">
+                <div class="w3-container w3-padding-64">
+                    <div class="content-container" style=" position: relative; top: -50px;">
+                        <h3 class="w3-center"
+                            style="font-weight: bold; color: rgb(0, 0, 0); position: relative; top: 8px;">Anggota 3</h3>
+                        <p class="w3-center"><em>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</em></p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa corporis neque quibusdam,
+                            tempora officia quaerat adipisci vitae deserunt provident suscipit vero accusantium autem.
+                            Sit maiores sed totam, tempora delectus fugit?
+                        </p>
+                        <div class="w3-row">
+                            <div class="w3-col m6 w3-center w3-padding-large">
+                                <p style="color: rgb(0, 0, 0); text-align: center;"><b><i
+                                            class="fa fa-user w3-margin-right"></i>Ghali Rizki Lesmana</b></p>
+                                <hr style="border-color: rgb(17, 151, 208);"><br>
+                                <div class="grille">
+                                    <a href="cvGalih/Tugas akhir v2 - Copy (2)/index.html">
+                                        <div class="card-img3">
+                                            <div class="img"></div>
+                                            <div class="card-box box-img left">
+                                                <h2>Ghali</h2>
+                                                <p>cloud solutions architect</p>
+                                            </div>
+                                            <div class="card-box box-img-2 right">
+                                                <h2>Skills</h2>
+                                                <p>Docker</p>
+                                                <p>Terraform</p>
+                                                <p>AWS</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Hide this text on small devices -->
+                            <div class="w3-col m6 w3-hide-small w3-padding-large">
+                                <p style="font-size: 16px;">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusamus debitis
+                                    vitae vero natus veniam veritatis accusantium commodi? Et reiciendis assumenda atque
+                                    unde soluta pariatur voluptate distinctio, animi rem praesentium. Lorem ipsum dolor,
+                                    sit amet consectetur adipisicing elit. Illum sit similique reprehenderit sequi
+                                    doloremque sapiente accusamus possimus quis suscipit voluptates hic, iste facilis.
+                                    Quisquam voluptatem quidem deleniti, explicabo nihil facere.
+                                </p>
+                                <div class="social-media">
+                                    <a href="https://github.com/Sumit43246"><i class='bx bxl-github'></i></a>
+                                    <a href="https://www.instagram.com/itsme.sabda_/"><i
+                                            class='bx bxl-instagram'></i></a>
+                                    <a href="https://x.com/Sumit_43246_"><i class='bx bxl-twitter'></i></a>
+                                    <a href="https://www.facebook.com/profile.php?id=100073174359992"><i
+                                            class='bx bxl-facebook'></i></a>
+                                    <a href="https://t.me/itz_official_boy_xr"><i class='bx bxl-telegram'></i></a>
+                                </div>
+                                <div>
+                                    <a href="https://wa.me/0895800808248" class="special-link" title="WhatsApp"><i
+                                            class="fa fa-envelope"></i> Message Me</a>
+                                </div>
+                                <div class="skill-bar" style="margin-top: -10px; width: 100%;">
+                                    <p class="" style="font-size: 16px;"><b><i class="fa fa-asterisk fa-fw"
+                                                style="font-size: 14px; color: rgb(17, 151, 208);"></i>Skills</b>
+                                    </p>
+                                    <p style="font-size: 14px; margin-top: 5px;">Adobe Photoshop</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:90%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            90%</div>
+                                    </div>
+                                    <p style="font-size: 14px;">Photography</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:80%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            <div class="w3-center w3-text-white">80%</div>
+                                        </div>
+                                    </div>
+                                    <p style="font-size: 14px;">Illustrator</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:75%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            75%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="member4" class="card container">
+            <div class="card-body">
+                <div class="w3-container w3-padding-64">
+                    <div class="content-container" style=" position: relative; top: -50px;">
+                        <h3 class="w3-center"
+                            style="font-weight: bold; color: rgb(0, 0, 0); position: relative; top: 8px;">Anggota 4</h3>
+                        <p class="w3-center"><em>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</em></p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa corporis neque quibusdam,
+                            tempora officia quaerat adipisci vitae deserunt provident suscipit vero accusantium autem.
+                            Sit maiores sed totam, tempora delectus fugit?
+                        </p>
+                        <div class="w3-row">
+                            <div class="w3-col m6 w3-center w3-padding-large">
+                                <p style="color: rgb(0, 0, 0); text-align: center;"><b><i
+                                            class="fa fa-user w3-margin-right"></i>SABDA INSAN PAMUNGKAS</b></p>
+                                <hr style="border-color: rgb(17, 151, 208);"><br>
+                                <div class="grille">
+                                    <a href="test.html">
+                                        <div class="card-img4">
+                                            <div class="img"></div>
+                                            <div class="card-box box-img left">
+                                                <h2>Sabda</h2>
+                                                <p>cloud solutions architect</p>
+                                            </div>
+                                            <div class="card-box box-img-2 right">
+                                                <h2>Skills</h2>
+                                                <p>Docker</p>
+                                                <p>Terraform</p>
+                                                <p>AWS</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- Hide this text on small devices -->
+                            <div class="w3-col m6 w3-hide-small w3-padding-large">
+                                <p style="font-size: 16px;">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusamus debitis
+                                    vitae vero natus veniam veritatis accusantium commodi? Et reiciendis assumenda atque
+                                    unde soluta pariatur voluptate distinctio, animi rem praesentium. Lorem ipsum dolor,
+                                    sit amet consectetur adipisicing elit. Illum sit similique reprehenderit sequi
+                                    doloremque sapiente accusamus possimus quis suscipit voluptates hic, iste facilis.
+                                    Quisquam voluptatem quidem deleniti, explicabo nihil facere.
+                                </p>
+                                <div class="social-media">
+                                    <a href="https://github.com/Sumit43246"><i class='bx bxl-github'></i></a>
+                                    <a href="https://www.instagram.com/itsme.sabda_/"><i
+                                            class='bx bxl-instagram'></i></a>
+                                    <a href="https://x.com/Sumit_43246_"><i class='bx bxl-twitter'></i></a>
+                                    <a href="https://www.facebook.com/profile.php?id=100073174359992"><i
+                                            class='bx bxl-facebook'></i></a>
+                                    <a href="https://t.me/itz_official_boy_xr"><i class='bx bxl-telegram'></i></a>
+                                </div>
+                                <div>
+                                    <a href="https://wa.me/0895800808248" class="special-link" title="WhatsApp"><i
+                                            class="fa fa-envelope"></i> Message Me</a>
+                                </div>
+                                <div class="skill-bar" style="margin-top: -10px; width: 100%;">
+                                    <p class="" style="font-size: 16px;"><b><i class="fa fa-asterisk fa-fw"
+                                                style="font-size: 14px; color: rgb(17, 151, 208);"></i>Skills</b>
+                                    </p>
+                                    <p style="font-size: 14px; margin-top: 5px;">Adobe Photoshop</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:90%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            90%</div>
+                                    </div>
+                                    <p style="font-size: 14px;">Photography</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:80%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            <div class="w3-center w3-text-white">80%</div>
+                                        </div>
+                                    </div>
+                                    <p style="font-size: 14px;">Illustrator</p>
+                                    <div class="w3-light-grey w3-round-xlarge w3-small">
+                                        <div class="w3-container w3-center w3-round-xlarge"
+                                            style="width:75%; color: #ffffff; background-color: rgb(17, 151, 208);">
+                                            75%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="card container">
+            <div class="card-body">
+                <h2>Contact Us</h2>
+                <div class="container-contact">
+                    <img src="img/shape.png" class="square" alt="" />
+                    <div class="form">
+                        <div class="contact-info">
+                            <h3 class="title">Let's get in touch</h3>
+                            <p class="text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                                dolorum adipisci recusandae praesentium dicta!
+                            </p>
+
+                            <div class="info">
+                                <div class="information">
+                                    <i class="fas fa-map-marker-alt"></i> &nbsp &nbsp
+
+                                    <p>92 Cherry Drive Uniondale, NY 11553</p>
+                                </div>
+                                <div class="information">
+                                    <i class="fas fa-envelope"></i> &nbsp &nbsp
+                                    <p>lorem@ipsum.com</p>
+                                </div>
+                                <div class="information">
+                                    <i class="fas fa-phone"></i>&nbsp&nbsp
+                                    <p>123-456-789</p>
+                                </div>
+                            </div>
+
+                            <div class="social-media-contact">
+                                <p>Connect with us :</p>
+                                <div class="social-icons">
+                                    <a href="#">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-form">
+                            <span class="circle one"></span>
+                            <span class="circle two"></span>
+
+                            <form action="index.html" autocomplete="off">
+                                <h3 class="title">Contact us</h3>
+                                <div class="input-container">
+                                    <input type="text" name="name" class="input" />
+                                    <label for="">Username</label>
+                                    <span>Username</span>
+                                </div>
+                                <div class="input-container">
+                                    <input type="email" name="email" class="input" />
+                                    <label for="">Email</label>
+                                    <span>Email</span>
+                                </div>
+                                <div class="input-container">
+                                    <input type="tel" name="phone" class="input" />
+                                    <label for="">Phone</label>
+                                    <span>Phone</span>
+                                </div>
+                                <div class="input-container textarea">
+                                    <textarea name="message" class="input"></textarea>
+                                    <label for="">Message</label>
+                                    <span>Message</span>
+                                </div>
+                                <input type="submit" value="Send" class="btn" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <footer>
+        <div class="footer-text">
+            <p>Copyright & copy; 2024 by Sabda Gwynbleidd | All Right Reserved.</p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a id="fl" href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+
+    <!-- scroll reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- typed js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <!-- custom js -->
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+    <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdpn.io/cpe/boomboom/pen.js?key=pen.js-effc7aec-d309-3b3e-5a32-4cdc0dd4d706"
+        crossorigin></script>
+
+</body>
+<script src="test.js"></script>
+
+</html>
